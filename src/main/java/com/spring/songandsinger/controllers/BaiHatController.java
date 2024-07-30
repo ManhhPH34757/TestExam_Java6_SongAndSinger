@@ -8,7 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.reverse;
 
 @RestController
 @RequestMapping("/api/songs")
@@ -53,8 +58,22 @@ public class BaiHatController {
         return baiHatDtoRepository.getBaiHatByGiaAndTenCaSi(tenCaSi, to, from);
     }
 
+    @GetMapping("/maxPrice")
+    public List<BaiHatDto> maxPrice() {
 
-    @GetMapping("/song")
+        List<BaiHatDto> list = baiHatDtoRepository.getBaiHatDtoList();
+
+        Optional<Double> maxPrice = list.stream()
+                .map(BaiHatDto::getGia)
+                .max(Comparator.comparingDouble(Double::doubleValue));
+
+        return maxPrice.map(aDouble -> list.stream()
+                .filter(baiHatDto -> baiHatDto.getGia().equals(aDouble))
+                .collect(Collectors.toList())).orElse(null);
+
+    }
+
+    @GetMapping("/song") /* Get data to add */
     public List<BaiHat> getBaiHat() {
         return baiHatRepository.findAll();
     }

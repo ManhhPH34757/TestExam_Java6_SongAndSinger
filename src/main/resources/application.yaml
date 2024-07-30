@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=PTPM_FINALLY_SOF306;encrypt=true;trustServerCertificate=true;
     username: sa
-    password: nguyenmanh2707
+    password: nguyenmanh2707 #Edit with username and password exactly
   jpa:
     open-in-view: true
     show-sql: true
