@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: SongAndSinger
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=PTPM_FINALLY_SOF306;encrypt=true;trustServerCertificate=true;
+    username: sa
+    password: nguyenmanh2707
+  jpa:
+    open-in-view: true
+    show-sql: true
