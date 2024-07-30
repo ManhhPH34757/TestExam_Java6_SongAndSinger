@@ -72,6 +72,19 @@ public class BaiHatController {
                 .collect(Collectors.toList())).orElse(null);
 
     }
+    
+    @GetMapping("/maxDuration")
+    public List<BaiHatDto> maxDuration() {
+        List<BaiHatDto> list = baiHatDtoRepository.getBaiHatDtoList();
+
+        Optional<Integer> maxDuration = list.stream()
+               .map(BaiHatDto::getThoiluong)
+               .max(Comparator.comparingInt(Integer::intValue));
+
+        return maxDuration.map(anInt -> list.stream()
+               .filter(baiHatDto -> baiHatDto.getThoiluong().equals(anInt))
+               .collect(Collectors.toList())).orElse(null);
+    }
 
     @GetMapping("/song") /* Get data to add */
     public List<BaiHat> getBaiHat() {
