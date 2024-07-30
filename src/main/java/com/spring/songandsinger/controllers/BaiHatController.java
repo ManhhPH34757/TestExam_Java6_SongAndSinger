@@ -1,7 +1,7 @@
 package com.spring.songandsinger.controllers;
 
 import com.spring.songandsinger.dto.BaiHatDto;
-import com.spring.songandsinger.dto.BaiHatDtoRepository;
+import com.spring.songandsinger.repositories.BaiHatDtoRepository;
 import com.spring.songandsinger.entities.BaiHat;
 import com.spring.songandsinger.repositories.BaiHatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.reverse;
 
 @RestController
 @RequestMapping("/api/songs")
@@ -85,6 +83,8 @@ public class BaiHatController {
                .filter(baiHatDto -> baiHatDto.getThoiluong().equals(anInt))
                .collect(Collectors.toList())).orElse(null);
     }
+
+
 
     @GetMapping("/song") /* Get data to add */
     public List<BaiHat> getBaiHat() {
