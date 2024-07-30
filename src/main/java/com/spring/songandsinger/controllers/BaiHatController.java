@@ -1,9 +1,11 @@
 package com.spring.songandsinger.controllers;
 
 import com.spring.songandsinger.dto.BaiHatDto;
+import com.spring.songandsinger.dto.CaSiDto;
 import com.spring.songandsinger.repositories.BaiHatDtoRepository;
 import com.spring.songandsinger.entities.BaiHat;
 import com.spring.songandsinger.repositories.BaiHatRepository;
+import com.spring.songandsinger.repositories.CaSiDtoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,9 @@ public class BaiHatController {
 
     @Autowired
     private BaiHatDtoRepository baiHatDtoRepository;
+
+    @Autowired
+    private CaSiDtoRepository caSiDtoRepository;
 
     @GetMapping()
     public List<BaiHatDto> getBaiHats() {
@@ -84,7 +89,10 @@ public class BaiHatController {
                .collect(Collectors.toList())).orElse(null);
     }
 
-
+    @GetMapping("/sumDurations")
+    public List<CaSiDto> getSumDurations() {
+        return caSiDtoRepository.getCaSiDtoList();
+    }
 
     @GetMapping("/song") /* Get data to add */
     public List<BaiHat> getBaiHat() {
