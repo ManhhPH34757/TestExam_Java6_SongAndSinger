@@ -8,6 +8,8 @@ import com.spring.songandsinger.repositories.BaiHatRepository;
 import com.spring.songandsinger.repositories.CaSiDtoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
@@ -44,8 +46,8 @@ public class BaiHatController {
     }
 
     @PostMapping()
-    public BaiHat createBaiHat(@RequestBody BaiHat baiHat) {
-        return baiHatRepository.save(baiHat);
+    public ResponseEntity<BaiHat> createBaiHat(@Validated @RequestBody BaiHat baiHat) {
+        return ResponseEntity.of(Optional.of(baiHatRepository.save(baiHat)));
     }
 
     @DeleteMapping("/{id}")
